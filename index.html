@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script defer type="module" src="./index.js"></script>
+        <link rel="stylesheet" href="./index.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Digital Image Processing</h1>
+        <input id="fileInput" type="file" />
+        <div id="imgPrevWrapper"></div>
+        <form action="" id="noiseForm">
+            <fieldset>
+                <legend>noise</legend>
+                <input
+                    type="radio"
+                    id="gaussian_noise"
+                    name="noise"
+                    value="gaussian_noise"
+                />
+                <label for="gaussian_noise">gaussian noise</label>
+                <input
+                    type="radio"
+                    id="salt_and_pepper"
+                    name="noise"
+                    value="salt_and_pepper"
+                />
+                <label for="salt_and_pepper">salt and pepper</label>
+            </fieldset>
+        </form>
+    </body>
+</html>
