@@ -1,46 +1,34 @@
-import { applyNoise } from "./noise.js";
+import { getNoisedData } from "./noise.js";
 
-let idt;
-let nidt;
+const img = new Image();
 
 function setHandler() {
     const $imgInput = document.querySelector("#fileInput");
-    const $imgWrapper = document.querySelector("#imgPrevWrapper");
     const $noiseForm = document.querySelector("#noiseForm");
+    const $cvs = document.querySelector("#canvas");
+    const ctx = $cvs.getContext("2d");
 
     $imgInput.addEventListener("change", (e) => {
         const [file] = e.target.files;
         if (file) {
-            $imgWrapper.innerHTML = "";
-            const $imgEl = createImg(file);
-            $imgEl.onload = () => {
-                idt = getImageData($imgEl);
+            img.src = URL.createObjectURL(file);
+            img.onload = () => {
+                ctx.canvas.width = img.width;
+                ctx.canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
             };
-            $imgWrapper.appendChild($imgEl);
         }
     });
 
     $noiseForm.addEventListener("change", (e) => {
-        if (!idt) return;
-        const selectedOption = e.target.value;
-        nidt = applyNoise(idt, selectedOption);
+        if (!img) return;
+        const noiseOption = e.target.value;
+
+        ctx.drawImage(img, 0, 0);
+        const imageData = ctx.getImageData(0, 0, img.width, img.height);
+        const noisedImageData = getNoisedData(imageData, noiseOption);
+        ctx.putImageData(noisedImageData, 0, 0);
     });
 }
-
-function createImg(imgFile) {
-    const $prevImg = new Image();
-    $prevImg.src = URL.createObjectURL(imgFile);
-
-    return $prevImg;
-}
-
-const getImageData = ($imgEl) => {
-    const $cvs = document.createElement("canvas");
-    [$cvs.width, $cvs.height] = [$imgEl.naturalWidth, $imgEl.naturalHeight];
-    const ctx = $cvs.getContext("2d");
-    ctx.drawImage($imgEl, 0, 0, $cvs.width, $cvs.height);
-
-    return ctx.getImageData(0, 0, $cvs.width, $cvs.height);
-};
 
 setHandler();
