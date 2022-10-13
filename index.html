@@ -12,6 +12,7 @@
         <h1>Digital Image Processing</h1>
         <input id="fileInput" type="file" />
         <canvas id="canvas"></canvas>
+
         <form action="" id="noiseForm">
             <fieldset>
                 <legend>noise</legend>
@@ -36,6 +37,40 @@
                     value="salt_and_pepper"
                 />
                 <label for="salt_and_pepper">salt and pepper</label>
+            </fieldset>
+        </form>
+
+        <form action="" id="filterForm">
+            <fieldset>
+                <legend>filter</legend>
+                <input
+                    type="radio"
+                    id="none"
+                    name="filter"
+                    value="none"
+                />
+                <label for="none">none</label>
+                <input
+                    type="radio"
+                    id="gaussian_filter"
+                    name="filter"
+                    value="gaussian_filter"
+                />
+                <label for="gaussian_filter">gaussian filter</label>
+                <input
+                    type="radio"
+                    id="box_filter"
+                    name="filter"
+                    value="box_filter"
+                />
+                <label for="box_filter">box filter</label>
+                <input
+                    type="radio"
+                    id="median_filter"
+                    name="filter"
+                    value="median_filter"
+                />
+                <label for="median_filter">median filter</label>
             </fieldset>
         </form>
     </body>
